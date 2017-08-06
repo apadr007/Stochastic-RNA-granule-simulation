@@ -1,4 +1,4 @@
-def Neighbors(x, layout):
+def newNeighborEdge(x, layout):
     possibilities = numpy.zeros(shape=(4,2))
     possibilities[0] = [1, 0]
     possibilities[1] = [-1, 0]
@@ -31,7 +31,7 @@ def Neighbors(x, layout):
 #g = Graph(4)
 #g.vs["name"] = range(4)
 #layout = { 0:[2,1], 1:[3,1], 2:[2,2], 3:[2,3] }
-#Neighbors([2,2], layout)
+#newNeighborEdge([2,2], layout)
 #print ''
 #print ''
 #print g
