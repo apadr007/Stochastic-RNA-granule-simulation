@@ -1,0 +1,33 @@
+def illegal_position_generator(spaceMax, spaceMin):
+    from itertools import permutations
+    boundary = spaceMax + 2
+    lower_boundary = spaceMin - 1
+    items = range(lower_boundary, boundary)
+    moves = {}
+    i = 0
+    for p in permutations(items, 2):
+        moves[i] = p
+        i += 1
+
+    illegal_moves = {}
+    legal_moves = {}
+    for key,value in moves.items():
+        for n,i in enumerate(value):
+            try:
+                if i <= spaceMin or i >= spaceMax:
+                    illegal_moves[key] = value
+            except:
+                continue
+
+    for key, value in illegal_moves.iteritems():
+        if value in moves.values():
+            del moves[key]
+
+    #This changes values into keys and vice versa
+    moves = {y:x for x,y in moves.iteritems()}
+    illegal_moves = {y:x for x,y in illegal_moves.iteritems()}
+
+    # include positions at edges
+    illegal_moves.update({(spaceMin,spaceMin):10000000, (spaceMax, spaceMax):100000001 })
+
+    return moves, illegal_moves

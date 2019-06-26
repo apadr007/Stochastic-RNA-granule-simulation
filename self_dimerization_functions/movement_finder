@@ -1,0 +1,43 @@
+def movement_finder(position_selected, illegal_moves, layout_old, spaceMin, spaceMax):
+    from operator import add
+
+    total_moves = 4
+    my_possibilities = {1: (1, 0), 2: (0,1), 3:(-1, 0), 4:(0,-1) }
+
+    finding_neighbors = {}
+    j = 0
+    for i in my_possibilities.values():
+        finding_neighbors[tuple(map(add, position_selected, i))] = j
+        j += 1
+
+
+    if position_selected[0] == spaceMin and position_selected[1] == spaceMin:
+        current_moves = 2
+        sd1 = set(finding_neighbors.keys())
+        sd2 = set(layout_old.keys())
+        current_moves = current_moves - len(sd1.intersection(sd2))
+        return current_moves
+    if position_selected[0] == spaceMax and position_selected[1] == spaceMax:
+        current_moves = 2
+        sd1 = set(finding_neighbors.keys())
+        sd2 = set(layout_old.keys())
+        current_moves = current_moves - len(sd1.intersection(sd2))
+        return current_moves
+    if position_selected[0] == spaceMin or position_selected[1] == spaceMin:
+        current_moves = 3
+        sd1 = set(finding_neighbors.keys())
+        sd2 = set(layout_old.keys())
+        current_moves = current_moves - len(sd1.intersection(sd2))
+        return current_moves
+    if position_selected[0] == spaceMax or position_selected[1] == spaceMax:
+        current_moves = 3
+        sd1 = set(finding_neighbors.keys())
+        sd2 = set(layout_old.keys())
+        current_moves = current_moves - len(sd1.intersection(sd2))
+        return current_moves
+    else:
+        sd1 = set(finding_neighbors.keys())
+        sd2 = set(layout_old.keys())
+        #sd3 = set(illegal_moves.keys())
+        current_moves = total_moves - len(sd1.intersection(sd2)) #- len(sd1.intersection(sd3))
+        return current_moves

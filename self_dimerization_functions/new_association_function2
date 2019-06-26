@@ -1,0 +1,33 @@
+def new_association_function2(x, d, g, new_dict, val):
+    import numpy as np
+    new_list = []
+    posit = np.array([[1,0], [0,1], [-1, 0], [0,-1] ])
+
+    new_posit = posit + x
+    for i in new_posit:
+        b = tuple(i)
+        if b in d:
+            new_list.append(b)
+            new_dict[x] = new_list
+    if x in new_dict and val == True:
+        options = new_dict[x]
+        toBind = random.choice(options)
+
+        # exit out of set in loop of these conditions are not met
+
+        if str(toBind) in g.vs['name']:
+            v1_position = g.vs['name'].index( str(toBind) )
+        else:
+            v1_position = g.vs['name'].index( toBind )
+        if str(x) in g.vs['name']:
+            v2_position = g.vs['name'].index( str(x) )
+        else:
+            v2_position = g.vs['name'].index( x )
+        if g.degree(v1_position) < 1 and g.degree(v2_position) < 1:
+            g.add_edge(v1_position, v2_position)
+        return new_dict[x]
+    elif x in new_dict and val == False:
+        return new_dict[x]
+    else:
+        new_dict[x] = 'NaN'
+        return new_dict[x]

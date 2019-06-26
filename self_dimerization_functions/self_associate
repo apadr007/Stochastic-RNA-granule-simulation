@@ -1,0 +1,19 @@
+def self_associate(x, d, g, val):
+    # this function keeps a running total of the self_loops that have been formed
+    try:
+        v_position = g.vs['name'].index( str(x) )
+
+        if g.degree(v_position) < 1:
+            g.add_edge(v_position, v_position)
+
+        # calculate the number of new self loops made
+        g2= g.copy()
+        totals = sum(g.degree())
+        self_loops = sum(g2.simplify(multiple = False, loops = True, combine_edges=None).degree())
+        # this requires you to divide by 2 because the edges are not directed and are therefore being counted twice for the same node
+        self_loops_count = (totals - self_loops)/2
+
+        return self_loops_count
+
+    except:
+        pass

@@ -1,0 +1,33 @@
+def Mover(position_selected, layout_old, illegal_moves):
+    import random
+    from operator import add
+
+    possibilities = {1: (1, 0), 2: (0,1), 3:(-1, 0), 4:(0,-1), 5:(0,0)}
+    movement_options = 4
+
+    newDir = random.choice(possibilities.values())
+    new_posit = tuple(map(add, position_selected, newDir))
+
+    new_position_selected = boundary_checker(position_selected, spaceMin, spaceMax)
+
+    if new_position_selected == position_selected:
+
+        if new_posit not in layout_old:
+            idx = layout_old.get(position_selected)
+
+            del layout_old[position_selected]
+            layout_old[new_posit] = idx
+
+            return layout_old, new_posit
+        else:
+            return layout_old, position_selected
+    else:
+        if new_position_selected not in layout_old:
+            idx = layout_old.get(position_selected)
+
+            del layout_old[position_selected]
+            layout_old[new_position_selected] = idx
+
+            return layout_old, new_position_selected
+        else:
+            return layout_old, position_selected

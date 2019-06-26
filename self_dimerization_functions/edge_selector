@@ -1,0 +1,6 @@
+def edge_selector(neighbor_tracking):
+    checker = 'NaN'
+    while checker == 'NaN':
+        val = random.choice(neighbor_tracking.keys())
+        checker = neighbor_tracking[val]
+    return val

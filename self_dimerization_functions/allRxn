@@ -1,0 +1,20 @@
+def allRxn(move, bind, self_bind, dissociate):
+    import numpy as np
+    import random
+
+    options = np.zeros((4, 1))
+    options[0] = move/(move + bind + self_bind + dissociate)
+    options[1] = (bind + move)/(move + bind + self_bind + dissociate)
+    options[2] = (bind + move + self_bind)/(move + bind + self_bind + dissociate)
+    options[3] = (bind + move + self_bind + dissociate)/(bind + move + self_bind + dissociate)
+
+    random_value = random.uniform(0, 1)
+
+    if 0 <= random_value <= options[0]:
+        return 'move'
+    elif options[1] <= random_value < options[2]:
+        return 'bind'
+    elif options[2] <= random_value < options[3]:
+        return 'self_bind'
+    else:
+        return 'dissociate'

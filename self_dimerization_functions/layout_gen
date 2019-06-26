@@ -1,0 +1,11 @@
+def layout_gen(node_number, legal_moves):
+    import random
+
+    wanted_keys = random.sample(legal_moves.keys(), node_number)
+    #using dictionary comprehension to subset a dictionary by keys
+    layout_old = dict((k, legal_moves[k]) for k in wanted_keys if k in legal_moves)
+
+   # #I am going to omit making this dict because I can keep tract of names using the values of layout_old as a name attribute in a graph
+   # #layout_names = {y:x for x,y in layout_old.iteritems()}
+
+    return layout_old
